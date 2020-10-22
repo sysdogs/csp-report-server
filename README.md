@@ -1,1 +1,1 @@
-# datadog-csp-reporter
+# csp-report-server
