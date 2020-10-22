@@ -7,7 +7,11 @@ import (
 )
 
 func fastHTTPHandler(ctx *fasthttp.RequestCtx) {
-	log.Error().RawJSON("report", ctx.PostBody()).Send()
+	if string(ctx.Request.URI().Path()) == "/csp-report" {
+		log.Error().RawJSON("report", ctx.PostBody()).RawJSON("uri", ctx.URI().FullURI()).Send()
+	} else {
+		log.Info().RawJSON("uri", ctx.URI().FullURI()).Send()
+	}
 }
 
 func main() {
